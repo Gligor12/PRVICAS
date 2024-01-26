@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "cypress": "^13.6.3"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/cypress open"
   }
 }
