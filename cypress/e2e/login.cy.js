@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+
+
 describe("Login functionality - Gallery App", ()=>{
 
     it("Unsuccessfull login - wrong email" , ()=>{
@@ -9,7 +11,7 @@ describe("Login functionality - Gallery App", ()=>{
         cy.get('label').eq(0).should('have.text', 'Email');
         cy.get('label').eq(1).should('have.text', 'Password');
         cy.get("button").should('have.text', "Submit");
-        cy.url().should('contain', '/login');
+        
 
         cy.get("#email").
         should('be.empty').
@@ -18,6 +20,7 @@ describe("Login functionality - Gallery App", ()=>{
         cy.get("button").click();
 
         cy.get('p').contains('Bad Credentials').should('be.visible').and('contain','Bad Credentials');
+        cy.url().should('contain', '/login');
     }); 
 
     it("Unsuccessfull login - empty password" , ()=>{
@@ -48,7 +51,11 @@ describe("Login functionality - Gallery App", ()=>{
     it("Successfull login" , ()=>{
         cy.visit("/login");
 
-        cy.get("#email").type("peraperic12345@gmail.com");
+        cy.get('h1').should('have.text' , 'Please login');
+        cy.get('label').eq(0).should('have.text', 'Email');
+        cy.get('label').eq(1).should('have.text', 'Password');
+
+        cy.get("#email").type("peraperic12345@gmail.com").should("have.value" , "peraperic12345@gmail.com");
         cy.get("#password").type("pera12345");
         cy.get("button").click();
         cy.get("a").contains('Logout').click();
