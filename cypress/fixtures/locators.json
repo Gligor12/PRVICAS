@@ -1,0 +1,22 @@
+{
+    "loginPage":{
+        "emailinputField":"#email",
+        "passwordInoutField":"#password",
+        "submitButton":"button",
+        "heading":"h1",
+        "inputFieldLabel":"label"
+    },
+    "craeteGallery":{
+        "titleInputField": "#title",
+        "descriptionInputField": "#description",
+        "imgURLInputField": "input[placeholder='image url']",
+        "pageURL":"a[href='/create']"
+        
+    },
+    "commonElements":{
+        "button": "button",
+        "heading": "h1",
+        "label":"label",
+        "verificationParagraph": ".alert-danger"
+    }
+}
