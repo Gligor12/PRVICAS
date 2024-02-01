@@ -17,6 +17,16 @@ class RegisterPage{
     get formCheckInput(){
         return cy.get(".form-check-input");
     }
+
+    registerUser(firstName, lastName, email, password, passwordConfirmation){
+        this.firstNameInputField.type(firstName);
+        this.lastNameInputField.type(lastName);
+        this.emailInputField.type(email);
+        this.passwordInputField.type(password);
+        this.passwordConfirmationInputField.type(passwordConfirmation);
+        this.formCheckInput.check();
+        cy.get("button").click();
+    }
 }
 
 export const registerPage = new RegisterPage();

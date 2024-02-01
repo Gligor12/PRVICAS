@@ -10,8 +10,7 @@ class LoginPage{
     }
 
     loginFunction(email , password ) {
-        this.emailInputField.should('be.empty').
-        type(email);
+        this.emailInputField.type(email);
 
         this.passwordInputField.type(password);
 

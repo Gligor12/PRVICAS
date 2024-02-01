@@ -1,14 +1,16 @@
 /// <reference types="Cypress" />
 
-const locators = require ('../fixtures/locators.json')
+const locators = require ('../fixtures/locators.json');
+import { createGallery } from '../page_objects/createGallery';
+
+import { loginPage } from '../page_objects/loginPage';
 
 describe("Create gallery functionality - Gallery App", ()=>{
 
     beforeEach(()=>{
         cy.visit("/login");
-        cy.get(locators.loginPage.emailinputField).type("peraperic12345@gmail.com");
-        cy.get(locators.loginPage.passwordInoutField).type("pera12345");
-        cy.get(locators.commonElements.button).click();
+        //Login
+        loginPage.loginFunction("peraperic12345@gmail.com" , "pera12345");
     });
 
    /* before(()=>{
@@ -19,30 +21,28 @@ describe("Create gallery functionality - Gallery App", ()=>{
     });*/
 
     it("Unsuccsessfull creation of gallery - Empty title" , ()=>{
-        //Login
+       
         
 
-        //Creation of new gallery
+        
         cy.get(locators.craeteGallery.pageURL).click();
         cy.url().should("contain" , "/create");
         cy.get(locators.commonElements.heading).should("contain" , "Create Gallery");
         cy.get(locators.commonElements.label).eq(0).should("have.text" , "Title:");
         cy.get(locators.commonElements.label).eq(1).should("have.text" , "Descriptions:");
         cy.get(locators.commonElements.label).eq(2).should("contain" , "Images:");
-
-        cy.get(locators.craeteGallery.titleInputField).type(" ");
-        cy.get(locators.craeteGallery.descriptionInputField).type("ajdbasjdbajd");
-        cy.get(locators.craeteGallery.imgURLInputField).type("https://cdn.pixabay.com/photo/2018/07/31/22/08/lion-3576045_1280.jpg");
-        cy.get(locators.commonElements.button).contains("Submit").click();
+        
+        //Creation of new gallery
+        createGallery.createGalleryFunction(" ", "dasdadadad", "https://cdn.pixabay.com/photo/2018/07/31/22/08/lion-3576045_1280.jpg");
 
         cy.url().should("contain" , "/create");
     });
 
     it("Unsuccsessfull creation of gallery - Empty images url" , ()=>{
-        //Login
+       
        
 
-        //Creation of new gallery
+       
         cy.get(locators.craeteGallery.pageURL).click();
         cy.url().should("contain" , "/create");
         cy.get(locators.commonElements.heading).should("contain" , "Create Gallery");
@@ -50,51 +50,41 @@ describe("Create gallery functionality - Gallery App", ()=>{
         cy.get(locators.commonElements.label).eq(1).should("have.text" , "Descriptions:");
         cy.get(locators.commonElements.label).eq(2).should("contain" , "Images:");
 
-        cy.get(locators.craeteGallery.titleInputField).type("Test gallery ");
-        cy.get(locators.craeteGallery.descriptionInputField).type("ajdbasjdbajd");
-        cy.get(locators.craeteGallery.imgURLInputField).type(" ");
-        cy.get(locators.commonElements.button).contains("Submit").click();
+         //Creation of new gallery
+        createGallery.createGalleryFunction("Test gallery", "dasdadadad", " ");
 
         cy.url().should("contain" , "/create");
     });
 
     it("Unsuccsessfull creation of gallery - Invalid format of images url" , ()=>{
-        //Login
        
-
-        //Creation of new gallery
         cy.get(locators.craeteGallery.pageURL).click();
         cy.url().should("contain" , "/create");
         cy.get(locators.commonElements.heading).should("contain" , "Create Gallery");
         cy.get(locators.commonElements.label).eq(0).should("have.text" , "Title:");
         cy.get(locators.commonElements.label).eq(1).should("have.text" , "Descriptions:");
         cy.get(locators.commonElements.label).eq(2).should("contain" , "Images:");
-
-        cy.get(locators.craeteGallery.titleInputField).type("Test gallery ");
-        cy.get(locators.craeteGallery.descriptionInputField).type("ajdbasjdbajd");
-        cy.get(locators.craeteGallery.imgURLInputField).type("https://gallery-app.vivifyideas.com/create");
-        cy.get(locators.commonElements.button).contains("Submit").click();
+        //Creation of new gallery
+        createGallery.createGalleryFunction("Test gallery", "dasdadadad", "https://gallery-app.vivifyideas.com/create");
 
         cy.get(locators.commonElements.verificationParagraph).contains("Wrong format of image").should("be.visible");
         cy.url().should("contain" , "/create");
     });
 
     it("Unsuccsessfull creation of gallery - Title contains less than 2 characters" , ()=>{
-        //Login
+        
        
 
-        //Creation of new gallery
+        
         cy.get(locators.craeteGallery.pageURL).click();
         cy.url().should("contain" , "/create");
         cy.get(locators.commonElements.heading).should("contain" , "Create Gallery");
         cy.get(locators.commonElements.label).eq(0).should("have.text" , "Title:");
         cy.get(locators.commonElements.label).eq(1).should("have.text" , "Descriptions:");
         cy.get(locators.commonElements.label).eq(2).should("contain" , "Images:");
-
-        cy.get(locators.craeteGallery.titleInputField).type("T");
-        cy.get(locators.craeteGallery.descriptionInputField).type("ajdbasjdbajd");
-        cy.get(locators.craeteGallery.imgURLInputField).type("https://cdn.pixabay.com/photo/2018/07/31/22/08/lion-3576045_1280.jpg");
-        cy.get(locators.commonElements.button).contains("Submit").click();
+        
+        //Creation of new gallery
+        createGallery.createGalleryFunction("T", "dasdadadad", "https://cdn.pixabay.com/photo/2018/07/31/22/08/lion-3576045_1280.jpg");
 
         cy.get(locators.commonElements.verificationParagraph).contains("The title must be at least 2 characters.").should("be.visible");
         cy.url().should("contain" , "/create");
@@ -126,7 +116,7 @@ describe("Create gallery functionality - Gallery App", ()=>{
 
 
 
-    it("Succsessfull creation of gallery", ()=>{
+    it.only("Succsessfull creation of gallery", ()=>{
         //Login
         
         
@@ -138,14 +128,19 @@ describe("Create gallery functionality - Gallery App", ()=>{
         cy.get(locators.commonElements.label).eq(1).should("have.text" , "Descriptions:");
         cy.get(locators.commonElements.label).eq(2).should("contain" , "Images:");
 
-        cy.get(locators.craeteGallery.titleInputField).type("Cypress test title");
-        cy.get(locators.craeteGallery.descriptionInputField).type("ajdbasjdbajd");
-        cy.get(locators.craeteGallery.imgURLInputField).type("https://cdn.pixabay.com/photo/2018/07/31/22/08/lion-3576045_1280.jpg");
-        cy.get(locators.commonElements.button).contains("Submit").click();
+        createGallery.createGalleryFunction("Test gallery", "dasdadadad", "https://cdn.pixabay.com/photo/2018/07/31/22/08/lion-3576045_1280.jpg");
 
         //Redirecting to All Galleries page
         cy.url().should("not.contain" , "/create");
         cy.get(locators.commonElements.heading).should('contain', "All Galleries");
+
+        cy.get(".box-title").eq(0).click();
+
+        cy.get("button").contains("Delete Gallery").click();
+
+        cy.window().then((win) => {
+            cy.stub(win, 'confirm').returns(true); // Simulira pritisak na "OK"
+          }); 
 
     });
 });

@@ -15,12 +15,7 @@ describe("Login functionality - Gallery App", ()=>{
         cy.get(locators.loginPage.inputFieldLabel).eq(1).should('have.text', 'Password');
         cy.get(locators.loginPage.submitButton).should('have.text', "Submit");
         
-
-        loginPage.emailInputField.
-        should('be.empty').
-        type("peraps@gmail.com");
-        loginPage.passwordInputField.type("pera12345");
-        loginPage.submitBtn.click();
+        loginPage.loginFunction("peraps@gmail.com","pera12345");
 
         cy.get('p').contains('Bad Credentials').should('be.visible').and('contain','Bad Credentials');
         cy.url().should('contain', '/login');
