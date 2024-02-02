@@ -8,10 +8,14 @@ import { loginPage } from '../page_objects/loginPage';
 describe("Create gallery functionality - Gallery App", ()=>{
 
     beforeEach(()=>{
-        cy.visit("/login");
+       /* cy.visit("/login");
         //Login
-        loginPage.loginFunction("peraperic12345@gmail.com" , "pera12345");
-    });
+        loginPage.loginFunction("peraperic12345@gmail.com" , "pera12345");*/
+
+            cy.loginViaAPI();
+            cy.visit("");
+        })
+    
 
    /* before(()=>{
         cy.visit("/login");
@@ -22,8 +26,6 @@ describe("Create gallery functionality - Gallery App", ()=>{
 
     it("Unsuccsessfull creation of gallery - Empty title" , ()=>{
        
-        
-
         
         cy.get(locators.craeteGallery.pageURL).click();
         cy.url().should("contain" , "/create");
@@ -116,7 +118,7 @@ describe("Create gallery functionality - Gallery App", ()=>{
 
 
 
-    it.only("Succsessfull creation of gallery", ()=>{
+    it("Succsessfull creation of gallery", ()=>{
         //Login
         
         
@@ -128,19 +130,19 @@ describe("Create gallery functionality - Gallery App", ()=>{
         cy.get(locators.commonElements.label).eq(1).should("have.text" , "Descriptions:");
         cy.get(locators.commonElements.label).eq(2).should("contain" , "Images:");
 
-        createGallery.createGalleryFunction("Test gallery", "dasdadadad", "https://cdn.pixabay.com/photo/2018/07/31/22/08/lion-3576045_1280.jpg");
+        createGallery.createGalleryFunction("Test gallery Gligor", "dasdadadad", "https://cdn.pixabay.com/photo/2018/07/31/22/08/lion-3576045_1280.jpg");
 
         //Redirecting to All Galleries page
         cy.url().should("not.contain" , "/create");
         cy.get(locators.commonElements.heading).should('contain', "All Galleries");
 
-        cy.get(".box-title").eq(0).click();
+       /* cy.get(".box-title").eq(0).click();
 
         cy.get("button").contains("Delete Gallery").click();
 
         cy.window().then((win) => {
             cy.stub(win, 'confirm').returns(true); // Simulira pritisak na "OK"
-          }); 
+          }); */
 
     });
 });
