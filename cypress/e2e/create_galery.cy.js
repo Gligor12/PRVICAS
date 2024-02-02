@@ -136,13 +136,13 @@ describe("Create gallery functionality - Gallery App", ()=>{
         cy.url().should("not.contain" , "/create");
         cy.get(locators.commonElements.heading).should('contain', "All Galleries");
 
-       /* cy.get(".box-title").eq(0).click();
+       cy.get(".box-title").eq(0).click();
 
         cy.get("button").contains("Delete Gallery").click();
 
         cy.window().then((win) => {
             cy.stub(win, 'confirm').returns(true); // Simulira pritisak na "OK"
-          }); */
+          }); 
 
     });
 });
