@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
 const locators = require ('../fixtures/locators.json');
-
+import {faker} from '@faker-js/faker';
 
 import { loginPage } from '../page_objects/loginPage';
 import { editGallery } from '../page_objects/editGalleryPage';
@@ -29,7 +29,7 @@ describe("Edit Gallery functionality", ()=>{
         cy.get(".cell").eq(0).children().children().eq(0).click();
         cy.get(".btn-custom").eq(1).click();
 
-        editGallery.editGalleryFunction("Cypress Edit" , "Cypress edit description")
+        editGallery.editGalleryFunction(faker.music.songName() , "Cypress edit description");
        
     });
 });
